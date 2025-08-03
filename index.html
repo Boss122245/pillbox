@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Pillbox Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      padding: 30px;
+      text-align: center;
+    }
+    h1 { color: #1e90ff; }
+    input[type="time"] {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    #status {
+      margin-top: 20px;
+      font-size: 20px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>Smart Pillbox Dashboard</h1>
+  <p>เลือกเวลาที่ต้องการให้แจ้งเตือน:</p>
+  <input type="time" id="pillTime">
+  <button onclick="setReminder()">ตั้งเตือน</button>
+  <div id="status"></div>
+
+  <audio id="alertSound" src="alarm.mp3" preload="auto"></audio>
+
+  <script src="main.js"></script>
+</body>
+</html>
