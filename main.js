@@ -1,39 +1,40 @@
 let reminderTime = null;
+let alreadyNotified = false;
 
 function setReminder() {
   const inputTime = document.getElementById("pillTime").value;
-  const status = document.getElementById("status");
-
   if (!inputTime) {
-    status.textContent = "กรุณาเลือกเวลา";
+    alert("กรุณาเลือกเวลา");
     return;
   }
-
   reminderTime = inputTime;
-  status.textContent = `ระบบจะเตือนเวลา ${reminderTime}`;
+  alreadyNotified = false;
+  document.getElementById("status").innerText = "ตั้งเวลาเรียบร้อย: " + reminderTime;
 }
 
-function checkReminder() {
-  if (!reminderTime) return;
-
+function checkTime() {
   const now = new Date();
-  const currentTime = now.toTimeString().slice(0, 5); // "HH:MM"
+  const currentTime = now.toTimeString().slice(0, 5);
 
-  if (currentTime === reminderTime) {
+  if (reminderTime && currentTime === reminderTime && !alreadyNotified) {
     notifyUser();
-    reminderTime = null; // เตือนครั้งเดียว
+    alreadyNotified = true;
   }
 }
 
 function notifyUser() {
   const audio = document.getElementById("alertSound");
-  audio.play().catch((err) => console.warn("เล่นเสียงไม่ได้:", err));
-
-  if (Notification.permission === "granted") {
-    new Notification("ถึงเวลาทานยาแล้ว!");
-  } else {
-    alert("ถึงเวลาทานยาแล้ว!");
-  }
+  audio.play();
+  document.getElementById("stopButton").style.display = "inline-block";
+  alert("ถึงเวลาทานยาแล้ว!");
 }
 
-setInterval(checkReminder, 1000); // ตรวจทุก 1 วินาที
+function stopAlarm() {
+  const audio = document.getElementById("alertSound");
+  audio.pause();
+  audio.currentTime = 0;
+  document.getElementById("stopButton").style.display = "none";
+  document.getElementById("status").innerText = "แจ้งเตือนถูกปิดแล้ว";
+}
+
+setInterval(checkTime, 1000);

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Smart Pillbox Dashboard</title>
   <style>
     body {
@@ -11,12 +10,17 @@
       padding: 30px;
       text-align: center;
     }
-    h1 { color: #1e90ff; }
+
+    h1 {
+      color: #1e90ff;
+    }
+
     input[type="time"] {
       padding: 10px;
       font-size: 16px;
       margin: 10px;
     }
+
     button {
       padding: 10px 20px;
       font-size: 16px;
@@ -26,6 +30,13 @@
       cursor: pointer;
       border-radius: 5px;
     }
+
+    #stopButton {
+      display: none;
+      background-color: red;
+      margin-top: 20px;
+    }
+
     #status {
       margin-top: 20px;
       font-size: 20px;
@@ -36,12 +47,14 @@
 <body>
   <h1>Smart Pillbox Dashboard</h1>
   <p>เลือกเวลาที่ต้องการให้แจ้งเตือน:</p>
-  <input type="time" id="pillTime">
+  <input type="time" id="pillTime" />
   <button onclick="setReminder()">ตั้งเตือน</button>
   <div id="status"></div>
+  <button id="stopButton" onclick="stopAlarm()">หยุดแจ้งเตือน</button>
 
-  <audio id="alertSound" src="alarm.mp3" preload="auto"></audio>
-
+  <!-- เสียงแจ้งเตือน -->
+  <audio id="alertSound" src="alarm.mp3" preload="auto" loop></audio>
   <script src="main.js"></script>
+
 </body>
 </html>
